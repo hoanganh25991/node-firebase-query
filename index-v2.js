@@ -72,36 +72,41 @@ fbPromise.then(function() {
         return stopWatch;
     }();
 
-    stopWatch.start();
-    database.ref('android')
-        // .indexOn('bssid')
-        .orderByChild('bssid')
-        // .equalTo('4a:d9:e7:21:db:40')
-        .equalTo('2a:a4:3c:db:7b:80')
-        .once('value', function (snap){
-            stopWatch.stop();
-            // var time2 = new Date();
-            // console.log((time2 - time) / 1000 + ' seconds');
-            console.log('fetched first once', snap.val());
-        });
-
-    // var rootRef = fb.database().ref();
-
-    // var androidRef = rootRef.child('android');
-
-    // androidRef.isEqual(rootRef);  // false
-    // androidRef.isEqual(rootRef.child("android"));  // true
-    // androidRef.parent.isEqual(rootRef);  // true
-    
+    // stopWatch.start();
     // database.ref('android')
     //     // .indexOn('bssid')
-    //     .orderByChild('mac')
-    //     .equalTo('b4:43:0d:10:1a:a8')
+    //     .orderByChild('bssid')
+    //     // .equalTo('4a:d9:e7:21:db:40')
+    //     .equalTo('2a:a4:3c:db:7b:80')
     //     .once('value', function (snap){
-    //         var time2 = new Date();
-    //         console.log((time2 - time) / 1000 + ' seconds');
+    //         stopWatch.stop();
+    //         // var time2 = new Date();
+    //         // console.log((time2 - time) / 1000 + ' seconds');
     //         console.log('fetched first once', snap.val());
     //     });
+
+    stopWatch.start();
+    database.ref('android/ad75b08ca48a911e/devices')
+        .orderByChild('mac')
+        .equalTo('b4:43:0d:10:1a:a8')
+        .once('value', function (snap){
+            stopWatch.stop();
+            console.log('base on device.mac', snap.val());
+
+            // var androidX = snap.val()[0];
+
+            // var device = androidX.devices['b4:43:0d:10:1a:a8'];
+            var device = snap.val();
+
+            device.online ? function(){
+                //try to ip address
+                console.log(device.ip);
+            }() : 
+            function(){
+                //move on
+                console.log('device is offline, move on');
+            }();
+        });
 
 
 });
