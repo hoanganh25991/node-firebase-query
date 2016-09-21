@@ -1,0 +1,10 @@
+curl -XDELETE 'http://localhost:9200/firebase'
+
+try on
+
+bssid: 4a:d9:e7:21:db:40
+model: Beeline Smart2
+
+set ES_HEAP_SIZE=2G & elasticsearch
+
+node --max-old-space-size=2048 app.js
