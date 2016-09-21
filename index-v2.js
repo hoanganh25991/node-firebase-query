@@ -185,16 +185,16 @@ fbPromise.then(function() {
 		return (from - supprotType[type] * 1000);
 	};
 
-	var from = getMilisecond();
+	// var from = getMilisecond();
 
-	stopWatch.start();
-	database.ref('android')
-		.orderByChild('last_accessed')
-		.startAt(oneXAgo(from, 'day'), 'last_accessed')
-		.endAt(from, 'last_accessed')
-		.once('value', function(snap){
-			console.log('last_accessed a-week ago', snap.val());
-		});
+	// stopWatch.start();
+	// database.ref('android')
+	// 	.orderByChild('last_accessed')
+	// 	.startAt(oneXAgo(from, 'day'), 'last_accessed')
+	// 	.endAt(from, 'last_accessed')
+	// 	.once('value', function(snap){
+	// 		console.log('last_accessed a-week ago', snap.val());
+	// 	});
 
 	// stopWatch.start();
 	// database.ref('android')
@@ -203,5 +203,26 @@ fbPromise.then(function() {
 	// 	.once('value', function(snap){
 	// 		console.log('last_accessed 1474328457350', snap.val());
 	// 	});
+	
+
+
+	stopWatch.start();
+	database.ref('android/ad75b08ca48a911e')
+	    .child('devices/b4:43:0d:10:1a:a8')
+	    .once('value', function (snap){
+	        stopWatch.stop();
+			
+	        console.log('base on device.mac', snap.val());
+	    });
+
+	stopWatch.start();
+	database.ref('android/adfadsf')
+	    .child('devices/b4:43:0d:10:1a:a8')
+	    .once('value', function (snap){
+	        stopWatch.stop();
+			
+	        console.log('base on device.mac', snap.val());
+	    });
+
 
 });
