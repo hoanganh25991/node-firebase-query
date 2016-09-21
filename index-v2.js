@@ -206,23 +206,52 @@ fbPromise.then(function() {
 	
 
 
+	// stopWatch.start();
+	// database.ref('android/ad75b08ca48a911e')
+	//     .child('devices/b4:43:0d:10:1a:a8')
+	//     .once('value', function (snap){
+	//         stopWatch.stop();
+			
+	//         console.log('base on device.mac', snap.val());
+	//     });
+
+	// stopWatch.start();
+	// database.ref('android/adfadsf')
+	//     .child('devices/b4:43:0d:10:1a:a8')
+	//     .once('value', function (snap){
+	//         stopWatch.stop();
+			
+	//         console.log('base on device.mac', snap.val());
+	//     });
+
+	// stopWatch.start();
+	// database.ref('android/ad75b08ca48a911e/devices/b4:43:0d:10:1a:a8')
+	//     .once('value', function (snap){
+	//         stopWatch.stop();
+			
+	//         console.log('base on device.mac', snap.val());
+	//     });
+
+	// stopWatch.start();
+	// database.ref('android/wrong_id/devices/b4:43:0d:10:1a:a8')
+	//     .once('value', function (snap){
+	//         stopWatch.stop();
+			
+	//         console.log('base on device.mac', snap.val());
+	//     });
+	
+	var lastAndroidId = 'e52728eec76dce3f';
 	stopWatch.start();
-	database.ref('android/ad75b08ca48a911e')
-	    .child('devices/b4:43:0d:10:1a:a8')
+	database.ref('android')
+		.startAt(null, lastAndroidId)
+		.limitToFirst(5)
 	    .once('value', function (snap){
 	        stopWatch.stop();
 			
 	        console.log('base on device.mac', snap.val());
 	    });
 
-	stopWatch.start();
-	database.ref('android/adfadsf')
-	    .child('devices/b4:43:0d:10:1a:a8')
-	    .once('value', function (snap){
-	        stopWatch.stop();
-			
-	        console.log('base on device.mac', snap.val());
-	    });
+    
 
 
 });
