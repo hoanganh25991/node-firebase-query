@@ -51,11 +51,15 @@ fbPromise.then(function() {
             console.log('fetched ', snap.val());
         });
 
+    var time = new Date();
+
     database.ref('android')
         // .indexOn('bssid')
         .orderByChild('bssid')
         .equalTo('4a:d9:e7:21:db:40')
         .once('value', function (snap){
+            var time2 = new Date();
+            console.log((time2 - time) / 1000 + ' seconds');
             console.log('fetched first once', snap.val());
         });
 
