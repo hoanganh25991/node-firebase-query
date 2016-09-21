@@ -39,37 +39,69 @@ fbPromise.catch(function(error) {
 fbPromise.then(function() {
     console.log('sign in success, %s, %s', email, password);
     var database = firebase.database();
-    database.ref('android')
-        .startAt('4a:d9:e7:21:db:40', 'bssid')
-        .endAt('4a:d9:e7:21:db:40', 'bssid')
-        .once('value', function(snap) {
-            console.log('bssid', snap.val());
-        });
+    // database.ref('android')
+    //     .startAt('4a:d9:e7:21:db:40', 'bssid')
+    //     .endAt('4a:d9:e7:21:db:40', 'bssid')
+    //     .once('value', function(snap) {
+    //         console.log('bssid', snap.val());
+    //     });
 
-    database.ref('android/ad75b08ca48a911e')
-        .once('value', function (snap){
-            console.log('fetched ', snap.val());
-        });
+    // database.ref('android/ad75b08ca48a911e')
+    //     .once('value', function (snap){
+    //         console.log('fetched ', snap.val());
+    //     });
 
-    var time = new Date();
+    var stopWatch = function(){
+        var stopWatch = this;
+        var startTime, stopTime, dif;
 
+        stopWatch.start = function(){
+            startTime = new Date();
+        };
+
+        stopWatch.stop = function(){
+            stopTime = new Date();
+            stopWatch.dif();
+        };
+
+        stopWatch.dif = function(){
+            var dif = (stopTime - startTime) / 1000 + ' seconds';
+            console.log(dif);
+        };
+
+        return stopWatch;
+    }();
+
+    stopWatch.start();
     database.ref('android')
         // .indexOn('bssid')
         .orderByChild('bssid')
-        .equalTo('4a:d9:e7:21:db:40')
+        // .equalTo('4a:d9:e7:21:db:40')
+        .equalTo('2a:a4:3c:db:7b:80')
         .once('value', function (snap){
-            var time2 = new Date();
-            console.log((time2 - time) / 1000 + ' seconds');
+            stopWatch.stop();
+            // var time2 = new Date();
+            // console.log((time2 - time) / 1000 + ' seconds');
             console.log('fetched first once', snap.val());
         });
 
-    var rootRef = fb.database().ref();
+    // var rootRef = fb.database().ref();
 
-    var androidRef = rootRef.child('android');
+    // var androidRef = rootRef.child('android');
 
     // androidRef.isEqual(rootRef);  // false
     // androidRef.isEqual(rootRef.child("android"));  // true
     // androidRef.parent.isEqual(rootRef);  // true
+    
+    // database.ref('android')
+    //     // .indexOn('bssid')
+    //     .orderByChild('mac')
+    //     .equalTo('b4:43:0d:10:1a:a8')
+    //     .once('value', function (snap){
+    //         var time2 = new Date();
+    //         console.log((time2 - time) / 1000 + ' seconds');
+    //         console.log('fetched first once', snap.val());
+    //     });
 
 
 });
